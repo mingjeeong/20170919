@@ -10,12 +10,30 @@
 <!-- logo -->
 <%@ include file="sampleLogo.jsp" %>
 
-<h3><a href="Login.jsp">로그인</a></h3>
-<h3><a href="Join.jsp">회원가입</a></h3>
-<h3><a href="FindId.jsp">아이디 찾기</a></h3>
-<h3><a href="FindPw.jsp">패스워드 찾기</a></h3>
-<h3><a href="List.jsp">공지글 보기</a></h3>
+<!-- menu -->
+<%@ include file="sampleMenu.jsp" %>
 
+<!-- notice -->
+<h3>공지등록</h3>
+<hr>
+<form action="List.jsp" >
+	<table>
+		<tr>
+			<td>공지번호</td>
+			<td><input type="text" name="noticeNo" id="noticeNo"></td>
+		</tr>
+		<tr>
+			<td>제목</td>
+			<td><input type="text" name="title" id="title"></td>
+		</tr>
+		<tr>
+			<td>내용</td>
+			<td><input type="text" name="contents" id="contents"></td>
+		</tr>
+	</table>
+	<input type="submit" name="submit" id="submit" value="등록">
+	
+</form>
 
 <!-- footer -->
 <jsp:include page="sampleFooter.jsp">
@@ -23,6 +41,5 @@
 	<jsp:param value="이용약관" name="footer2"/>
 	<jsp:param value="이메일무단수집거부" name="footer3"/>
 </jsp:include>
-
 </body>
 </html>

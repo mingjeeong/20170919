@@ -1,5 +1,7 @@
 package model.service;
 
+import java.util.ArrayList;
+
 import model.dao.MemberDao;
 import model.dto.MemberDto;
 /**
@@ -97,8 +99,12 @@ public class Service {
 	 */
 	public MemberDto myInfo(String userid) {
 		return dao.select(userid);
+		
 	}
 	
-	
+	public ArrayList<MemberDto> allInfo() {
+		return dao.selectAll();
+		
+	}
 
 }

@@ -11,9 +11,14 @@
 사용자 아이디 : <%= session.getAttribute("userid") %><br>
 사용자 이름 : <%= session.getAttribute("username") %>
 
+<h3><a href="List.jsp">공지글 보기</a></h3>
+<h3><a href="controller?action=allinfo">회원 전체 보기</a></h3>
 <h3><a href="controller?action=myinfo">내 정보 보기</a></h3>
-<h3><a href="controller?action=myinfo">내 정보 변경</a></h3>
+<h3><a href="controller?action=updateinfo">내 정보 변경</a></h3>
+<h3><a href="controller?action=updateinfo">비밀번호 변경</a></h3>
 <h3><a href="controller?action=logout">로그아웃</a></h3>
+
+
 
 </body>
 </html>

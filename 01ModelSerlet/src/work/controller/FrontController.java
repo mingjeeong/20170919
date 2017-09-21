@@ -1,38 +1,72 @@
 package work.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.MemberDao;
 import model.dto.MemberDto;
 import model.service.Service;
 
 /**
  * Servlet implementation class FrontController
+
  * 
  * 
  */
+
+
 
 public class FrontController extends HttpServlet {
 	
 	private Service service = new Service();
 	
+	
+	//초기화메서드에서 web.xml 초기화 데이터 가져와서 멤버변수 설정
+	public void init(ServletConfig config) throws ServletException{
+		System.out.println(config.getInitParameter("title")+" "+config.getInitParameter("name"));
+		
+		
+	}
+	
+	protected void updateInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(">>>>> 회원 정보 변경 요청서비스 메서드 수행");
+		
+		
+	}
+	
+	protected void showAllInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(">>>>> 전체 회원 정보 보기 요청서비스 메서드 수행");
+		
+		ArrayList<MemberDto> result = service.allInfo();
+		// debug
+		System.out.println(">>>> result : " + result);
+		
+		if(result != null) {
+			request.setAttribute("list",result);
+			request.getRequestDispatcher("/AllInfo.jsp").forward(request,response);
+		}
+		else {
+			request.setAttribute("errorMessage", "전체 정보 보기 실패 ");
+			request.getRequestDispatcher("/Error.jsp").forward(request,response);
+		}
+		
+	}
 	protected void showMyInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(">>>>> 내정보 보기 요청서비스 메서드 수행");
 		
 		HttpSession session = request.getSession(false);
 		String userid = (String) session.getAttribute("userid");
-		String username = (String) session.getAttribute("username");
+		
 		MemberDto result = service.myInfo(userid);
 		
-		
 		if(result != null) {
-			request.setAttribute("successMessage",result);
+			request.setAttribute("dto",result);
 			request.getRequestDispatcher("/MyInfo.jsp").forward(request,response);
 		}
 		else {
@@ -104,10 +138,8 @@ public class FrontController extends HttpServlet {
 			request.getRequestDispatcher("/Error.jsp").forward(request,response);
 			
 		}
-		
-		
-		
 	}
+	
 	protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(">>>>> 로그아웃 요청서비스 메서드 수행");
 		
@@ -116,6 +148,7 @@ public class FrontController extends HttpServlet {
 		session.invalidate();
 		response.sendRedirect("Index.jsp");  
 	}
+	
 	protected void join(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(">>>>> 회원가입 요청서비스 메서드 수행");
 		
@@ -229,7 +262,6 @@ public class FrontController extends HttpServlet {
 			
 		}
 		
-		
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -253,6 +285,12 @@ public class FrontController extends HttpServlet {
 			break;
 		case "myinfo" :
 			showMyInfo(request,response);
+			break;
+		case "allinfo" :
+			showAllInfo(request,response);
+			break;
+		case "updateinfo" :
+			updateInfo(request,response);
 			break;
 		default :
 			System.out.println("미지원 서비스입니다");

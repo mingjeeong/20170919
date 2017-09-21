@@ -12,6 +12,8 @@ import java.io.Serializable;
  *  생성자 중복 정의 
  *  테이블 구조 참조해서 작성 
  *  자바 변수명 규칙/ DB SQL 컬럼명 규칙
+ *  
+ *  ##자바빈 컴포넌트
  * </pre>
  * 
  * @author kosta
@@ -53,6 +55,7 @@ public class MemberDto implements Serializable {
 		this.userid = userid;
 		this.userpw = userpw;
 	}
+	
 	public MemberDto(String userid) {
 		this.userid = userid;
 	}
@@ -148,11 +151,6 @@ public class MemberDto implements Serializable {
 		this.preference = preference;
 	}
 
-	
-	
-	
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -215,10 +213,5 @@ public class MemberDto implements Serializable {
 		builder.append("선호하는 도서 분야 : "+preference);
 		return builder.toString();
 	}
-	
-	
-
-	
-	
 
 }

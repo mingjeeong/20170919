@@ -505,7 +505,7 @@ public class MemberDao {
 				userid = rs.getString("userid");
 				username = rs.getString("username");
 				userpw = rs.getString("userpw");
-				addr = rs.getString("addr");
+				addr = rs.getString("address");
 				mobile = rs.getString("mobile");
 				preference = rs.getString("preference");
 				birth = rs.getString("birth");
@@ -520,8 +520,9 @@ public class MemberDao {
 			e.printStackTrace();
 			System.out.println("error : 회원 전체조회 오류");
 
-		} 
-		factory.close(conn, pstm);
+		} finally {
+			factory.close(conn, pstm);
+		}
 		return null;
 	}
 	
